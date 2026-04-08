@@ -87,3 +87,22 @@ cd java && mvn spring-boot:run
 Tools exposed: `calculateBmi`, `getTemperature`, `getGreeting`
 
 See [`java/README.md`](java/README.md) for more details.
+
+## C++
+
+Located in directory: `cpp/`
+
+Build the server:
+```bash
+cd cpp
+cmake -B build && cmake --build build
+```
+
+Start the server:
+```bash
+./build/mcp_server
+```
+
+Tools exposed: `calculate_bmi`, `get_temperature`, `get_greeting`
+
+See `cpp/README.md` for more details.
