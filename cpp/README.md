@@ -7,7 +7,6 @@ A C++ implementation of the MCP server using:
 - **[nlohmann/json](https://github.com/nlohmann/json)** — header-only JSON library
 - **CMake** with `FetchContent` (no manual dependency installation needed)
 
-Both dependencies are fetched automatically at configure time.
 
 ## Prerequisites
 
