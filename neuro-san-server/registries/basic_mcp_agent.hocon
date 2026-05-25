@@ -18,10 +18,9 @@
             "name": "HelloWorldAgent",
             "function": {
                 # The description acts as an initial prompt.
-                "description": """I greet people"""
+                "description": """Calculates body mass index (BMI) given a person's weight and height."""
             },
-            "instructions": """You are an agent that greets people. When you
-            receive a request, respond with a friendly greeting message. Use your tools to calculate BMI""",
+            "instructions": """You are a BMI calculator. When the user provides their weight and height (any common units — kg/lb, m/cm/ft+in), use your tools to compute the BMI and report the numeric result along with the standard interpretation (underweight, normal, overweight, obese).""",
             "tools": ["http://127.0.0.1:8000/mcp"]
         },
     ]
