@@ -18,10 +18,11 @@
             "name": "HelloWorldAgent",
             "function": {
                 # The description acts as an initial prompt.
-                "description": """I greet people"""
+                "description": """I am an agent that uses MCP tools to perform tasks such as calculating BMI."""
             },
-            "instructions": """You are an agent that greets people. When you
-            receive a request, respond with a friendly greeting message. Use your tools to calculate BMI""",
+            "instructions": """You are an agent that uses MCP tools to perform tasks requested by the user.
+            When you receive a request, use your available tools to fulfil it.
+            For example, you can calculate a user's BMI given their weight and height.""",
             "tools": ["http://127.0.0.1:8000/mcp"]
         },
     ]
