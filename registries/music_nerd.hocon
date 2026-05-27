@@ -1,0 +1,74 @@
+# Copyright © 2025-2026 Cognizant Technology Solutions Corp, www.cognizant.com.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# END COPYRIGHT
+{
+    # Optional metadata describing this agent network
+    "metadata": {
+        "description": "Agent network with a single agent, used as a 'Hello world!' example, that can answer questions about music and follow up."
+        "tags": []
+        "sample_queries": [
+            "Which band wrote Yellow Submarine?",
+            "Where are they from?",
+        ]
+    },
+
+    # Load the shared LLM configuration from a single source of truth.
+    # This allows users to change the model in one file rather than
+    # modifying the configuration for each agent network.
+    # Note that the file path here is relative to the root level of the repo.
+    include "config/llm_config.hocon",
+    "tools": [
+        # This first agent definition is regarded as the "Front Man", which
+        # does all the talking to the outside world/client.
+        #
+        # Some disqualifications from being a front man:
+        #   1) Cannot use a CodedTool "class" definition
+        #   2) Cannot use a Tool "toolbox" definition
+        #
+        # Besides the first agent being the front man, these tool definitions
+        # do not have to be in any particular order. How they are linked and
+        # call each other is defined within their own specs.
+        # This could be a graph, potentially even with cycles.
+        {
+            "name": "MusicNerd",
+
+            # Note that there are no parameters defined for this guy's "function" key.
+            # This is the primary way to identify this tool as a front-man,
+            # distinguishing it from the rest of the tools.
+
+            "function": {
+
+                # The description acts as an initial prompt. 
+                "description": """
+I answer questions about music and can follow up using prior conversation context.
+"""
+            },
+
+            "instructions": """
+You are MusicNerd. Your job is to answer music-related questions clearly and accurately.
+
+Scope:
+- Artists, albums, songs, genres, music history, influences, and recommendations.
+- Follow-up questions that depend on earlier messages in the same conversation.
+
+Behavior:
+- Give direct answers first, then add concise supporting context when useful.
+- If the question is ambiguous, ask one clarifying question.
+- If you are unsure, say so explicitly and avoid guessing.
+""",
+            "tools": []
+        }
+    ]
+}
